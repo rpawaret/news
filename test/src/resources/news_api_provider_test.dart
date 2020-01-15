@@ -4,13 +4,15 @@ import 'dart:convert';
 import 'package:test/test.dart';
 import 'package:http/http.dart';
 
-void main(List<String> args) {
-  test('FetchTopIds returns a list ids', () {
+void main() {
+  test('FetchTopIds returns a list ids', () async {
     // setup of test case
     final newsApi = NewsApiProvider();
-    MockClient((request) {
-      
-    })
+    newsApi.client = MockClient((request) async {
+      return Response(json.encode([1, 2, 3, 4]), 200);
+    });
+    final ids = await newsApi.fetchTopIds();
     // expectation
+    expect(ids, [1, 2, 3, 4]);
   });
 }
