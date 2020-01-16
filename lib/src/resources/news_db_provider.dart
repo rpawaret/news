@@ -5,7 +5,9 @@ import 'package:path/path.dart';
 import 'dart:async';
 import '../models/item_model.dart';
 
-
-void main() {
-
+class NewsDbProvider {
+  Database db;
+  init() async {
+    
+  }
 }
