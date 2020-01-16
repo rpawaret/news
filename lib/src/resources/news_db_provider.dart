@@ -5,6 +5,7 @@ import 'package:path/path.dart';
 import 'dart:async';
 import '../models/item_model.dart';
 import '../models/item_model.dart';
+import '../models/item_model.dart';
 
 class NewsDbProvider {
   Database db;
@@ -50,5 +51,9 @@ class NewsDbProvider {
     }
 
     return null;
+  }
+
+  addItem(ItemModel item) {
+    db.insert('Items', item.toMap());
   }
 }
