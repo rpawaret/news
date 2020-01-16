@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:path/path.dart';
 import 'dart:async';
 import '../models/item_model.dart';
+import '../models/item_model.dart';
 
 class NewsDbProvider {
   Database db;
@@ -45,7 +46,7 @@ class NewsDbProvider {
     );
 
     if (maps.length > 0) {
-
+      return ItemModel.fromDb(maps.first);
     }
 
     return null;
