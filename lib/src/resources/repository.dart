@@ -12,7 +12,7 @@ class Repository {
     NewsApiProvider()
   ];
 
-  List<Cache> cached = <Cache>[
+  List<Cache> caches = <Cache>[
     NewsDbProvider()
   ];
 
@@ -21,10 +21,19 @@ class Repository {
   }
 
   Future<ItemModel> fetchItem(int id) async {
-    var item = await dbProvider.fetchItem(id);
-    if (item != null) return item;
-    item = await apiProvider.fetchItem(id);
-    dbProvider.addItem(item);
+    ItemModel item;
+    Source source;
+    for (source in sources) {
+      item = await source.fetchItem(id);
+      if(item != null) {
+        break;
+      }
+    }
+
+    for (var cache in caches) {
+      cache.addItem(item);
+    }
+    
     return item;
   }
 }
