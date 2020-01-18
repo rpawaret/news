@@ -6,7 +6,7 @@ import 'package:path/path.dart';
 import 'dart:async';
 import '../models/item_model.dart';
 
-class NewsDbProvider implements Source{
+class NewsDbProvider implements Source, Cache {
   Database db;
   void init() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
