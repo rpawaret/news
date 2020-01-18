@@ -1,19 +1,17 @@
 import 'dart:async';
 import '../models/item_model.dart';
-import '../models/item_model.dart';
-import '../models/item_model.dart';
 import 'news_api_provider.dart';
 import 'news_db_provider.dart';
 
 class Repository {
 
   List<Source> sources = <Source>[
-    NewsDbProvider(),
+    newsDbProvider,
     NewsApiProvider()
   ];
 
   List<Cache> caches = <Cache>[
-    NewsDbProvider()
+    newsDbProvider
   ];
 
   Future<List<int>> fetchTopIds() {
@@ -33,7 +31,7 @@ class Repository {
     for (var cache in caches) {
       cache.addItem(item);
     }
-    
+
     return item;
   }
 }
