@@ -6,6 +6,8 @@ class NewsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = StoriesProvider.of(context);
+    bloc.fetchTopIds(); // BAD
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Top News'),
@@ -18,14 +20,14 @@ class NewsList extends StatelessWidget {
 Widget bulidList(StoriesBloc bloc) {
   return StreamBuilder(
     stream: bloc.topIds,
-    builder: (context, snapshot) {
+    builder: (BuildContext context, AsyncSnapshot<List<int>> snapshot) {
       if (!snapshot.hasData) {
         return Text('Still waiting on Ids');
       } else {
         return ListView.builder(
           itemCount: snapshot.data.length,
           itemBuilder: (context, int index) {
-            return Text(snapshot.data[index]);
+            return Text('${snapshot.data[index]}');
           },
         );
       }
