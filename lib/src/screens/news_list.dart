@@ -22,7 +22,7 @@ Widget bulidList(StoriesBloc bloc) {
     stream: bloc.topIds,
     builder: (BuildContext context, AsyncSnapshot<List<int>> snapshot) {
       if (!snapshot.hasData) {
-        return Text('Still waiting on Ids');
+        return Center(child: CircularProgressIndicator());
       } else {
         return ListView.builder(
           itemCount: snapshot.data.length,
