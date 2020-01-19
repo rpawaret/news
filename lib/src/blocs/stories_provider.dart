@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news/src/blocs/stories_bloc.dart';
+export 'package:news/src/blocs/stories_bloc.dart';
 
 class StoriesProvider extends InheritedWidget {
   final StoriesBloc bloc;
