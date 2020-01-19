@@ -1,37 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:news/src/blocs/stories_bloc.dart';
 import 'dart:async';
+import 'package:news/src/blocs/stories_provider.dart';
 
 class NewsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final bloc = StoriesProvider.of(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Top News'),
       ),
-      body: buildList(),
+      body: Text('Show a list'),
     );
   }
-}
-
-Widget buildList() {
-  return ListView.builder(
-    itemCount: 1000,
-    itemBuilder: (BuildContext context, int index) {
-      return FutureBuilder(
-        future: getFuture(),
-        builder: (context, snapshot) {
-          return Container(
-            height: 80,
-            child: snapshot.hasData
-                ? Text('I am visible $index')
-                : Text('I havent fetched data yet $index'),
-          );
-        },
-      );
-    },
-  );
-}
-
-getFuture() {
-  return Future.delayed(Duration(seconds: 2), () => 'hi');
 }
