@@ -3,6 +3,8 @@ import 'package:news/src/models/item_model.dart';
 import 'package:news/src/blocs/stories_provider.dart';
 import 'dart:async';
 
+import '../models/item_model.dart';
+
 class NewsListTile extends StatelessWidget {
   final int itemId;
 
@@ -26,10 +28,20 @@ class NewsListTile extends StatelessWidget {
               return Text('Still loading item $itemId');
             }
 
-            return Text(itemSnapshot.data.title);
+            return buildTile(itemSnapshot.data);
           },
         );
       },
+    );
+  }
+
+  Widget buildTile(ItemModel item) {
+    return ListTile(
+      title: Text(item.title),
+      subtitle: Text('${item.score} points'),
+      trailing: Column(
+        children: <Widget>[Icon(Icons.comment), Text('${item.descendants}')],
+      ),
     );
   }
 }
