@@ -21,7 +21,23 @@ class NewsDetail extends StatelessWidget {
     return StreamBuilder(
       stream: bloc.itemWithComments,
       builder: (BuildContext context,
-          AsyncSnapshot<Map<int, Future<ItemModel>>> snapshot) {},
+          AsyncSnapshot<Map<int, Future<ItemModel>>> snapshot) {
+        if (!snapshot.hasData) {
+          return Text('Loading...');
+        }
+        final itemFuture = snapshot.data[itemId];
+        return FutureBuilder(
+          future: itemFuture,
+          builder:
+              (BuildContext context, AsyncSnapshot<ItemModel> itemSnapshot) {
+            if (!itemSnapshot.hasData) {
+              return Text('Loading');
+            }
+
+            return Text('${itemSnapshot.data.title}');
+          },
+        );
+      },
     );
   }
 }
