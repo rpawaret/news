@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-
-import '../models/item_model.dart';
+import 'package:news/src/widgets/loading_container.dart';
 import '../models/item_model.dart';
 
 class Comment extends StatelessWidget {
@@ -17,7 +16,7 @@ class Comment extends StatelessWidget {
       future: itemMap[itemId],
       builder: (BuildContext context, AsyncSnapshot<ItemModel> snapshot) {
         if (!snapshot.hasData) {
-          return Text('Still loading comment');
+          return LoadingContainer();
         }
 
         final item = snapshot.data;
